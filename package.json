@@ -1,0 +1,29 @@
+{
+  "name": "attendance-discord-bot",
+  "version": "1.0.0",
+  "description": "Discord bot to handle attendance of members inside server",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/morliran/Attendance-Discord-Bot.git"
+  },
+  "author": "Liran Mor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/morliran/Attendance-Discord-Bot/issues"
+  },
+  "homepage": "https://github.com/morliran/Attendance-Discord-Bot#readme",
+  "dependencies": {
+    "@vscode/sqlite3": "^5.0.8",
+    "discord.js": "^13.6.0",
+    "dotenv": "^16.0.0",
+    "knex": "^1.0.5",
+    "moment": "^2.29.2",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.15"
+  }
+}
