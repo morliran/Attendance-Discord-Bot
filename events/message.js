@@ -12,11 +12,11 @@ module.exports = new Event("messageCreate", (client, message) => {
   attendance.server_id = message.guild.id;
 
   // Getting the specific user from the file by his id.
-  let checkServerExists = await serverService
-  .getServerId(attendance.server_id)
-  .then((res) => {
-    return res;
-  });
+  let checkServerExists = serverService
+    .getServerId(attendance.server_id)
+    .then((res) => {
+      return res;
+    });
 
   // If there is already server with that id, update his name.
   if (Object.keys(checkServerExists).length !== 0) {
@@ -27,10 +27,7 @@ module.exports = new Event("messageCreate", (client, message) => {
   }
   // Otherwise, I will insert the new data.
   else {
-    serverService.newServer(
-      attendance.server_id,
-      attendance.server
-    );
+    serverService.newServer(attendance.server_id, attendance.server);
   }
 
   if (message.author.bot) return;
