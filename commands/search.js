@@ -44,13 +44,14 @@ module.exports = new Command({
         }
       }
       // Search by specific id.
-      else if (to_search_by.length === 18 && !isNaN(Number(to_search_by))) {
+      else if (to_search_by.length === 18) {
         if (message.member.roles.cache.find((r) => r.name === "Staff")) {
           let userAbsences = await attendanceService
             .getAttendanceOfUser(to_search_by, attendance.server_id)
             .then((res) => {
               return res;
             });
+          console.log(userAbsences);
           if (userAbsences.length > 0) {
             displayHelper.displaySplitMessageEmbed(
               userAbsences,
