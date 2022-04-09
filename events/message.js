@@ -45,8 +45,6 @@ module.exports = new Event("messageCreate", async (client, message) => {
       return res;
     });
 
-  console.log(isServerOnMaintenance);
-
   if (message.author.bot) return;
 
   if (!message.content.startsWith(client.prefix)) return;
@@ -56,7 +54,7 @@ module.exports = new Event("messageCreate", async (client, message) => {
   const command = client.commands.find((cmd) => cmd.name == args[0]);
 
   if (!command) return message.reply(`${args[0]} is not a valid command!`);
-
+  // If there is maintenance mode and the command that the user used is not restart then display maintenance mode message.
   if (
     isServerOnMaintenance.server_maintenance &&
     message.content.toLowerCase() !== `${process.env.BOT_PREFIX}restart`

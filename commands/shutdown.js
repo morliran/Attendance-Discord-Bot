@@ -11,7 +11,7 @@ module.exports = new Command({
   async run(message, args, client) {
     await serverService.updateServerMaintenanceMode(attendance.server_id, true);
     client.user.setStatus("idle");
-    client.user.setActivity(`While I am at maintenance mode`, {
+    client.user.setActivity(`Maintenance mode 🛠`, {
       type: "WATCHING",
     });
     return message.reply({
