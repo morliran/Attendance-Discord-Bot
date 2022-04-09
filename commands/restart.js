@@ -19,7 +19,7 @@ module.exports = new Command({
         type: "WATCHING",
       });
       return message.reply({
-        content: `${attendance.server} went out from maintenance mode.`,
+        content: `${client.user.username} Inside: ${attendance.server} went out from maintenance mode.`,
       });
     } else {
       return message.reply({
