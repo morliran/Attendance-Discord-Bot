@@ -6,17 +6,19 @@ const serverService = require("../services/serverService.js");
 
 require("dotenv").config();
 
-module.exports = new Event("messageCreate", (client, message) => {
+module.exports = new Event("messageCreate", async (client, message) => {
   // So the bot will know in which server he got message.
   attendance.server = message.guild.name;
   attendance.server_id = message.guild.id;
 
   // Getting the specific user from the file by his id.
-  let checkServerExists = serverService
+  let checkServerExists = await serverService
     .getServerId(attendance.server_id)
     .then((res) => {
       return res;
     });
+
+  console.log(checkServerExists);
 
   // If there is already server with that id, update his name.
   if (Object.keys(checkServerExists).length !== 0) {
