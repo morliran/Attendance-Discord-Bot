@@ -57,7 +57,7 @@ module.exports = new Command({
               userAbsences,
               message,
               client,
-              `__**${userAbsences.user_name} absence data:**__`
+              `__**${userAbsences[0].user_name} absence data:**__`
             );
           } else {
             if (
@@ -69,7 +69,7 @@ module.exports = new Command({
               });
             } else {
               return message.reply({
-                content: `There isn't absence data for ${userAbsences.user_name} at this moment in ${attendance.server} server.`,
+                content: `There isn't absence data for ${userAbsences[0].user_name} at this moment in ${attendance.server} server.`,
               });
             }
           }
