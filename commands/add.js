@@ -20,7 +20,7 @@ module.exports = new Command({
     }
     let end_date = args[1];
     let the_reason = args[2].split("-").join(" ");
-    let fullArgs = args.slice(0).join(" ");
+    let fullArgs = args.slice(1).join(" ");
     console.log(fullArgs);
     let now = moment().format(attendance.date_formatter);
     let randColor = "#" + Math.random().toString(16).slice(-6); // six-number format aka #abc123
