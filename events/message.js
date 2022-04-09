@@ -33,7 +33,8 @@ module.exports = new Event("messageCreate", async (client, message) => {
   }
   // Otherwise, I will insert the new data.
   else {
-    serverService.newServer(attendance.server_id, attendance.server);
+    console.log("here");
+    await serverService.newServer(attendance.server_id, attendance.server);
   }
 
   if (message.author.bot) return;
