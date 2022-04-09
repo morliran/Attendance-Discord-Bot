@@ -13,7 +13,7 @@ module.exports = new Event("messageCreate", async (client, message) => {
 
   // Getting the specific user from the file by his id.
   let checkServerExists = await serverService
-    .getServerId(attendance.server)
+    .getServerName(attendance.server_id)
     .then((res) => {
       return res;
     });
