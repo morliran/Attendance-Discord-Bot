@@ -15,7 +15,7 @@ function checkMinusSplitInStringDate(strDate) {
 }
 
 function checkValidDate(theDate) {
-  return moment(theDate, attendance.date_formatter).isValid();
+  return moment(theDate, attendance.date_formatter, true).isValid();
 }
 
 function checkStartDateBeforeEnd(start, end) {
