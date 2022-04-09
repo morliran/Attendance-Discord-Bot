@@ -11,8 +11,6 @@ module.exports = new Event("messageCreate", async (client, message) => {
   attendance.server = message.guild.name;
   attendance.server_id = message.guild.id;
 
-  console.log(attendance.server_id);
-
   // Getting the specific user from the file by his id.
   let checkServerExists = await serverService
     .getServerName(attendance.server_id)
@@ -20,13 +18,17 @@ module.exports = new Event("messageCreate", async (client, message) => {
       return res;
     });
 
-  console.log(checkServerExists);
-
   // If there is already server with that id, update his name.
-  if (Object.keys(checkServerExists).length !== 0) {
+  if (
+    Object.keys(checkServerExists).length !== 0 &&
+    checkServerExists.server_name !== attendance.server
+  ) {
     serverService.updateServerName(
-      { server_id: attendance.server_id, server_name: attendance.server },
-      message.guild.name
+      {
+        server_id: checkServerExists.server_id,
+        server_name: checkServerExists.server_name,
+      },
+      attendance.server
     );
   }
   // Otherwise, I will insert the new data.

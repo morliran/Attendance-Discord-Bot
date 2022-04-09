@@ -63,7 +63,6 @@ class KnexConnection {
   async getServerName(serverId) {
     try {
       return await this.knex("servers")
-        .select()
         .where({
           server_id: serverId,
         })
