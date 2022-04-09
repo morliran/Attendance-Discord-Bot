@@ -58,7 +58,7 @@ module.exports = new Event("messageCreate", async (client, message) => {
   if (!command) return message.reply(`${args[0]} is not a valid command!`);
 
   if (
-    isServerOnMaintenance &&
+    isServerOnMaintenance.server_maintenance &&
     message.content.toLowerCase() !== `${process.env.BOT_PREFIX}restart`
   ) {
     return message.reply(`${attendance.server} is under maintenance mode.`);
