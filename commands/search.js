@@ -51,7 +51,6 @@ module.exports = new Command({
             .then((res) => {
               return res;
             });
-          console.log(userAbsences);
           if (userAbsences.length > 0) {
             displayHelper.displaySplitMessageEmbed(
               userAbsences,

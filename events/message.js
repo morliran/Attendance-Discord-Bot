@@ -94,5 +94,7 @@ module.exports = new Event("messageCreate", async (client, message) => {
       `You do not have the permission \`${command.permission}\` to run this command!`
     );
 
+  (message) => setTimeout(() => message.delete(), 10000 * 30);
+
   command.run(message, args, client);
 });
