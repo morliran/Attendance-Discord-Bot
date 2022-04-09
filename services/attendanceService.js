@@ -12,7 +12,7 @@ class KnexConnection {
     until,
     total,
     reason,
-    serverId
+    server_id
   ) {
     try {
       const res = await this.knex("attendance").insert({
@@ -22,7 +22,7 @@ class KnexConnection {
         until,
         total,
         reason,
-        serverId,
+        server_id,
       });
       return res;
     } catch (err) {
