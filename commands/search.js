@@ -26,7 +26,7 @@ module.exports = new Command({
       // If the user want to see his absence data.
       if (to_search_by.toLowerCase() === "me") {
         let myAbsences = await attendanceService
-          .getAttendanceOfUser(message.author.id)
+          .getAttendanceOfUser(message.author.id, attendance.server_id)
           .then((res) => {
             return res;
           });
@@ -47,7 +47,7 @@ module.exports = new Command({
       else if (to_search_by.length === 18 && !isNaN(Number(to_search_by))) {
         if (message.member.roles.cache.find((r) => r.name === "Staff")) {
           let userAbsences = await attendanceService
-            .getAttendanceOfUser(to_search_by)
+            .getAttendanceOfUser(to_search_by, attendance.server_id)
             .then((res) => {
               return res;
             });
@@ -88,7 +88,7 @@ module.exports = new Command({
         });
       }
       let absenceWithSpecificDate = await attendanceService
-        .getAttendanceByEndDate(to_search_by)
+        .getAttendanceByEndDate(to_search_by, attendance.server_id)
         .then((res) => {
           return res;
         });

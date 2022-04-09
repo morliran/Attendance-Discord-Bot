@@ -2,12 +2,36 @@ const Event = require("../structures/event.js");
 
 const attendance = require("../config/attendance.json");
 
+const serverService = require("../services/serverService.js");
+
 require("dotenv").config();
 
 module.exports = new Event("messageCreate", (client, message) => {
   // So the bot will know in which server he got message.
   attendance.server = message.guild.name;
   attendance.server_id = message.guild.id;
+
+  // Getting the specific user from the file by his id.
+  let checkServerExists = await serverService
+  .getServerId(attendance.server_id)
+  .then((res) => {
+    return res;
+  });
+
+  // If there is already server with that id, update his name.
+  if (Object.keys(checkServerExists).length !== 0) {
+    serverService.updateServerName(
+      { server_id: attendance.server_id, server_name: attendance.server },
+      message.guild.name
+    );
+  }
+  // Otherwise, I will insert the new data.
+  else {
+    serverService.newServer(
+      attendance.server_id,
+      attendance.server
+    );
+  }
 
   if (message.author.bot) return;
 

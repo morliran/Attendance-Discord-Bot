@@ -28,7 +28,11 @@ module.exports = new Command({
       });
     }
     let userAbsences = await attendanceService
-      .getAttendanceOfUserByStartDate(message.author.id, theDate)
+      .getAttendanceOfUserByStartDate(
+        message.author.id,
+        theDate,
+        attendance.server_id
+      )
       .then((res) => {
         return res;
       });
@@ -36,7 +40,8 @@ module.exports = new Command({
     if (Object.keys(userAbsences).length !== 0) {
       attendanceService.deleteAttendanceByStartDateOfUser(
         message.author.id,
-        theDate
+        theDate,
+        attendance.server_id
       );
       message.reply({
         content: `Your absence data in start date ${theDate} removed successfully.`,

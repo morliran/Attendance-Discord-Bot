@@ -26,8 +26,10 @@ module.exports = new Command({
           .filter((x) => x !== undefined);
         // If there is data inside theUser.
         if (theUser.length > 0) {
-          await attendanceService.deleteAllAttendanceOfUser(to_search_by);
-          // userFile.removeAllAbsenceOfUser(to_search_by);
+          await attendanceService.deleteAllAttendanceOfUser(
+            to_search_by,
+            attendance.server_id
+          );
           message.reply({
             content: `The absence data of ${theUser[0].username} removed successfully.`,
           });

@@ -1,5 +1,3 @@
-const fs = require("fs");
-
 const Event = require("../structures/event.js");
 
 require("dotenv").config();

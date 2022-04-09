@@ -47,7 +47,7 @@ module.exports = new Command({
 
     // Getting the specific user from the file by his id.
     let checkUserExists = await attendanceService
-      .getAttendanceOfUser(message.author.id)
+      .getAttendanceOfUser(message.author.id, attendance.server_id)
       .then((res) => {
         return res;
       });
@@ -61,7 +61,11 @@ module.exports = new Command({
     // If there is a data with same end date, then I will update the reason.
     if (checkEndDateExists.length > 0) {
       attendanceService.updateEndDateReason(
-        { user_id: message.author.id, until: end_date },
+        {
+          user_id: message.author.id,
+          until: end_date,
+          server_id: attendance.server_id,
+        },
         the_reason
       );
       message.reply({
@@ -76,7 +80,8 @@ module.exports = new Command({
         now,
         end_date,
         datesHelper.totalDays(now, end_date),
-        the_reason
+        the_reason,
+        attendance.server_id
       );
       const embed = new Discord.MessageEmbed()
         .setTitle("__**Successfully add this absence details:**__")

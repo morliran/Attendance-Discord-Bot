@@ -12,7 +12,7 @@ module.exports = new Command({
   permission: "SEND_MESSAGES",
   async run(message, args, client) {
     const guildUsers = await attendanceService
-      .getAllAttendance()
+      .getAllAttendance(attendance.server_id)
       .then((res) => {
         return res;
       });

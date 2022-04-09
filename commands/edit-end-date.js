@@ -35,7 +35,11 @@ module.exports = new Command({
     // Otherwise, update his new end date, if this date is after the start date of the absence.
     else {
       let prevAttendance = await attendanceService
-        .getAttendanceOfUserByEndDate(message.author.id, oldEndDate)
+        .getAttendanceOfUserByEndDate(
+          message.author.id,
+          oldEndDate,
+          attendance.server_id
+        )
         .then((res) => {
           return res;
         });
@@ -54,7 +58,11 @@ module.exports = new Command({
         // Otherwise, update the new end date.
         else {
           await attendanceService.updateEndDate(
-            { user_id: message.author.id, until: oldEndDate },
+            {
+              user_id: message.author.id,
+              until: oldEndDate,
+              server_id: attendance.server_id,
+            },
             newEndDate
           );
           message.reply({

@@ -31,7 +31,11 @@ module.exports = new Command({
     // Otherwise, update his new reason, if this reason is not undefined.
     else {
       let prevAttendance = await attendanceService
-        .getAttendanceOfUserByEndDate(message.author.id, endDate)
+        .getAttendanceOfUserByEndDate(
+          message.author.id,
+          endDate,
+          attendance.server_id
+        )
         .then((res) => {
           return res;
         });
@@ -43,7 +47,11 @@ module.exports = new Command({
         // Otherwise, update the new reason.
         else {
           await attendanceService.updateEndDateReason(
-            { user_id: message.author.id, until: endDate },
+            {
+              user_id: message.author.id,
+              until: endDate,
+              server_id: attendance.server_id,
+            },
             theReason
           );
           message.reply({

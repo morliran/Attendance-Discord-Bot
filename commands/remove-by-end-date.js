@@ -43,7 +43,11 @@ module.exports = new Command({
         // If the user that doing this command have Staff role, then continue.
         if (message.member.roles.cache.find((r) => r.name === "Staff")) {
           let userAbsences = await attendanceService
-            .getAttendanceOfUserByEndDate(to_search_by, theDate)
+            .getAttendanceOfUserByEndDate(
+              to_search_by,
+              theDate,
+              attendance.server_id
+            )
             .then((res) => {
               return res;
             });
@@ -58,7 +62,8 @@ module.exports = new Command({
           if (Object.keys(userAbsences).length !== 0) {
             await attendanceService.deleteAttendanceByEndDateOfUser(
               to_search_by,
-              theDate
+              theDate,
+              attendance.server_id
             );
             message.reply({
               content: `The absence data of ${theUser[0].username} in end date ${theDate} removed successfully.`,
