@@ -15,6 +15,7 @@ module.exports = new Command({
   description: "Add absence of guild user to guild absence users file.",
   permission: "SEND_MESSAGES",
   async run(message, args, client) {
+    message.delete();
     if (args[2] == undefined) {
       return message.reply(`Please provide reason.`);
     }
