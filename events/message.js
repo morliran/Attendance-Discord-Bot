@@ -45,6 +45,8 @@ module.exports = new Event("messageCreate", async (client, message) => {
       return res;
     });
 
+  console.log(isServerOnMaintenance);
+
   if (message.author.bot) return;
 
   if (!message.content.startsWith(client.prefix)) return;
