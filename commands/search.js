@@ -23,6 +23,7 @@ module.exports = new Command({
 
     // If the user don't want to display absence until specific date.
     if (datesHelper.checkValidDate(to_search_by) === false) {
+      console.log(to_search_by.length);
       // If the user want to see his absence data.
       if (to_search_by.toLowerCase() === "me") {
         let myAbsences = await attendanceService
