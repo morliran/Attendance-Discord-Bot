@@ -59,9 +59,18 @@ module.exports = new Command({
               `__**${userAbsences.user_name} absence data:**__`
             );
           } else {
-            return message.reply({
-              content: `There isn't absence data for ${userAbsences.user_name} at this moment in ${attendance.server} server.`,
-            });
+            if (
+              userAbsences.user_name === undefined ||
+              userAbsences.user_name === null
+            ) {
+              return message.reply({
+                content: `There isn't absence data for this user at this moment in ${attendance.server} server.`,
+              });
+            } else {
+              return message.reply({
+                content: `There isn't absence data for ${userAbsences.user_name} at this moment in ${attendance.server} server.`,
+              });
+            }
           }
         } else {
           return message.reply({
