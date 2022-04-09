@@ -19,7 +19,11 @@ module.exports = new Event("messageCreate", async (client, message) => {
     });
 
   // If there is already server with that id, update his name.
-  if (checkServerExists && Object.keys(checkServerExists).length !== 0) {
+  if (
+    checkServerExists !== null &&
+    checkServerExists !== undefined &&
+    Object.keys(checkServerExists).length !== 0
+  ) {
     console.log(checkServerExists);
     if (checkServerExists.server_name !== attendance.server) {
       serverService.updateServerName(
