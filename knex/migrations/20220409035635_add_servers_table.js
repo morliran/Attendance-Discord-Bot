@@ -1,3 +1,5 @@
+const { options } = require("nodemon/lib/config");
+
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }

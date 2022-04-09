@@ -9,6 +9,12 @@ class DbConnection {
         database: "heroku_894fe4745785d91",
         user: "b38fe9b8af3a69",
         password: "8d749356",
+        typeCast: function (field, next) {
+          if (field.type == "TINY" && field.length == 1) {
+            return field.string() == "1"; // 1 = true, 0 = false
+          }
+          return next();
+        },
       },
     };
   }
