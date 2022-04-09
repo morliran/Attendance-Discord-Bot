@@ -39,6 +39,12 @@ module.exports = new Event("messageCreate", async (client, message) => {
     await serverService.newServer(attendance.server_id, attendance.server);
   }
 
+  let isServerOnMaintenance = await serverService
+    .getServerMaintenanceMode(attendance.server_id)
+    .then((res) => {
+      return res;
+    });
+
   if (message.author.bot) return;
 
   if (!message.content.startsWith(client.prefix)) return;
@@ -48,6 +54,13 @@ module.exports = new Event("messageCreate", async (client, message) => {
   const command = client.commands.find((cmd) => cmd.name == args[0]);
 
   if (!command) return message.reply(`${args[0]} is not a valid command!`);
+
+  if (
+    isServerOnMaintenance &&
+    message.content.toLowerCase() !== `${process.env.BOT_PREFIX}restart`
+  ) {
+    return message.reply(`${attendance.server} is under maintenance mode.`);
+  }
 
   const permission = message.member.permissions.has(command.permission, true);
 

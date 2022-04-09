@@ -40,6 +40,20 @@ class KnexConnection {
     }
   }
 
+  async updateServerMaintenanceMode(serverId, newMode) {
+    try {
+      return await this.knex("servers")
+        .where({
+          server_id: serverId,
+        })
+        .update({
+          server_maintenance: newMode,
+        });
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async getAllServers() {
     try {
       return await this.knex.select().table("servers");
@@ -63,6 +77,19 @@ class KnexConnection {
   async getServerName(serverId) {
     try {
       return await this.knex("servers")
+        .where({
+          server_id: serverId,
+        })
+        .first();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getServerMaintenanceMode(serverId) {
+    try {
+      return await this.knex("servers")
+        .select("server_maintenance")
         .where({
           server_id: serverId,
         })
