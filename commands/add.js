@@ -51,11 +51,11 @@ module.exports = new Command({
       .then((res) => {
         return res;
       });
-    let checkEndDateExists = [];
+    let checkStartDateExists = [];
 
     // If there is data for that user, I will check if there is already same end date.
     if (checkUserExists.length > 0) {
-      checkEndDateExists = checkUserExists.filter((u) => u.from === now);
+      checkStartDateExists = checkUserExists.filter((u) => u.from === now);
     }
 
     if (datesHelper.totalDays(now, end_date) > attendance.maxDayToBeOffline) {
@@ -68,7 +68,7 @@ module.exports = new Command({
     }
 
     // If there is a data with same end date, then I will update the reason.
-    if (checkEndDateExists.length > 0) {
+    if (checkStartDateExists.length > 0) {
       attendanceService.updateStartDateEndDate(
         {
           user_id: message.author.id,
