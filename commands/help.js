@@ -9,11 +9,7 @@ module.exports = new Command({
   description: "Show the commands for the users.",
   permission: "SEND_MESSAGES",
   async run(message, args, client) {
-    let theCommand = client.help_commands
-      .filter((cmd) => cmd.name === args[1])
-      .map((c) => {
-        return c.name !== "restart" && c.name !== "shutdown";
-      });
+    let theCommand = client.help_commands.filter((cmd) => cmd.name === args[1]);
     let randColor = "#" + Math.random().toString(16).slice(-6); // six-number format aka #abc123
     if (theCommand.length > 0) {
       const embed = new Discord.MessageEmbed()

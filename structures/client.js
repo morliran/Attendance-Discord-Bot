@@ -37,10 +37,12 @@ class Client extends Discord.Client {
 
     commands.forEach((cmd) => {
       this.commands.set(cmd.name, cmd);
-      this.help_commands.push({
-        name: cmd.name,
-        description: cmd.description,
-      });
+      if (cmd.name !== "restart" && cmd.name !== "shutdown") {
+        this.help_commands.push({
+          name: cmd.name,
+          description: cmd.description,
+        });
+      }
     });
 
     // Event Handler
