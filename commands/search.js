@@ -24,7 +24,7 @@ module.exports = new Command({
     // If the user don't want to display absence until specific date.
     if (datesHelper.checkValidDate(to_search_by) === false) {
       // If the user want to see his absence data.
-      if (to_search_by.toLowerCase() === "me") {
+      if (to_search_by.toLowerCase() === "me" && to_search_by.length === 2) {
         let myAbsences = await attendanceService
           .getAttendanceOfUser(message.author.id, attendance.server_id)
           .then((res) => {
@@ -44,7 +44,7 @@ module.exports = new Command({
         }
       }
       // Search by specific id.
-      else if (to_search_by.length === 18 && !isNaN(Number(to_search_by))) {
+      if (to_search_by.length === 18 && !isNaN(Number(to_search_by))) {
         if (message.member.roles.cache.find((r) => r.name === "Staff")) {
           let userAbsences = await attendanceService
             .getAttendanceOfUser(to_search_by, attendance.server_id)
