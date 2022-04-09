@@ -19,7 +19,7 @@ module.exports = new Command({
     }
     let start_date = args[1];
     let end_date = args[2];
-    let the_reason = args[3].split("-").join(" ");
+    let the_reason = args.slice(3).join(" ");
     let randColor = "#" + Math.random().toString(16).slice(-6); // six-number format aka #abc123
 
     if (start_date == undefined || end_date == undefined) {

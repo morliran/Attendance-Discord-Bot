@@ -16,7 +16,7 @@ module.exports = new Command({
       return message.reply(`Please provide reason.`);
     }
     let endDate = args[1];
-    let theReason = args[2].replace("-", " ");
+    let theReason = args.slice(2).join(" ");
 
     // Check if the enDate is valid.
     if (

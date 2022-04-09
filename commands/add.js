@@ -19,9 +19,7 @@ module.exports = new Command({
       return message.reply(`Please provide reason.`);
     }
     let end_date = args[1];
-    let the_reason = args[2].split("-").join(" ");
-    let fullArgs = args.slice(2).join(" ");
-    console.log(fullArgs);
+    let the_reason = args.slice(2).join(" ");
     let now = moment().format(attendance.date_formatter);
     let randColor = "#" + Math.random().toString(16).slice(-6); // six-number format aka #abc123
 
