@@ -23,7 +23,6 @@ module.exports = new Command({
 
     // If the user don't want to display absence until specific date.
     if (datesHelper.checkValidDate(to_search_by) === false) {
-      console.log(to_search_by.length);
       // If the user want to see his absence data.
       if (to_search_by.toLowerCase() === "me") {
         let myAbsences = await attendanceService
@@ -39,7 +38,7 @@ module.exports = new Command({
             `__**${message.author.username} absence data:**__`
           );
         } else {
-          message.reply({
+          return message.reply({
             content: `There isn't absence data for you at this moment in ${attendance.server} server.`,
           });
         }
@@ -52,28 +51,25 @@ module.exports = new Command({
             .then((res) => {
               return res;
             });
-          let theUserName = client.users.cache.find(
-            (user) => user.id === to_search_by
-          );
           if (userAbsences.length > 0) {
             displayHelper.displaySplitMessageEmbed(
               userAbsences,
               message,
               client,
-              `__**${theUserName.username} absence data:**__`
+              `__**${userAbsences.user_name} absence data:**__`
             );
           } else {
-            message.reply({
-              content: `There isn't absence data for ${theUserName.username} at this moment in ${attendance.server} server.`,
+            return message.reply({
+              content: `There isn't absence data for ${userAbsences.user_name} at this moment in ${attendance.server} server.`,
             });
           }
         } else {
-          message.reply({
+          return message.reply({
             content: `Sorry, it's seems like you don't have the permission to use this key value search.`,
           });
         }
       } else {
-        message.reply({
+        return message.reply({
           content: `Please put a valid search value (me, or user id).`,
         });
       }
@@ -101,7 +97,7 @@ module.exports = new Command({
           `__**Absence data until ${to_search_by}:**__`
         );
       } else {
-        message.reply({
+        return message.reply({
           content: `There isn't absence data with ending date ${to_search_by} for ${attendance.server} server.`,
         });
       }
