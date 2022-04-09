@@ -19,17 +19,16 @@ module.exports = new Event("messageCreate", async (client, message) => {
     });
 
   // If there is already server with that id, update his name.
-  if (
-    Object.keys(checkServerExists).length !== 0 &&
-    checkServerExists.server_name !== attendance.server
-  ) {
-    serverService.updateServerName(
-      {
-        server_id: checkServerExists.server_id,
-        server_name: checkServerExists.server_name,
-      },
-      attendance.server
-    );
+  if (Object.keys(checkServerExists).length !== 0) {
+    if (checkServerExists.server_name !== attendance.server) {
+      serverService.updateServerName(
+        {
+          server_id: checkServerExists.server_id,
+          server_name: checkServerExists.server_name,
+        },
+        attendance.server
+      );
+    }
   }
   // Otherwise, I will insert the new data.
   else {
