@@ -24,7 +24,6 @@ module.exports = new Event("messageCreate", async (client, message) => {
     checkServerExists !== undefined &&
     Object.keys(checkServerExists).length !== 0
   ) {
-    console.log(checkServerExists);
     if (checkServerExists.server_name !== attendance.server) {
       serverService.updateServerName(
         {
@@ -37,7 +36,6 @@ module.exports = new Event("messageCreate", async (client, message) => {
   }
   // Otherwise, I will insert the new data.
   else {
-    console.log("here");
     await serverService.newServer(attendance.server_id, attendance.server);
   }
 

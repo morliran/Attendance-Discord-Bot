@@ -36,7 +36,6 @@ class Client extends Discord.Client {
     let commands = commandFiles.map((file) => require(`../commands/${file}`));
 
     commands.forEach((cmd) => {
-      // console.log(`Command ${cmd.name} loaded`);
       this.commands.set(cmd.name, cmd);
       this.help_commands.push({
         name: cmd.name,
@@ -55,7 +54,6 @@ class Client extends Discord.Client {
          * @type {Event}
          */
         const event = require(`../events/${file}`);
-        // console.log(`Event ${event.event} loaded`);
         this.on(event.event, event.run.bind(null, this));
       });
     this.login(token);
