@@ -55,7 +55,7 @@ module.exports = new Command({
 
     // If there is data for that user, I will check if there is already same end date.
     if (checkUserExists.length > 0) {
-      checkEndDateExists = checkUserExists.filter((u) => u.until === end_date);
+      checkEndDateExists = checkUserExists.filter((u) => u.from === now);
     }
 
     if (datesHelper.totalDays(now, end_date) > attendance.maxDayToBeOffline) {
@@ -69,16 +69,16 @@ module.exports = new Command({
 
     // If there is a data with same end date, then I will update the reason.
     if (checkEndDateExists.length > 0) {
-      attendanceService.updateEndDateReason(
+      attendanceService.updateStartDateEndDate(
         {
           user_id: message.author.id,
-          until: end_date,
+          from: now,
           server_id: attendance.server_id,
         },
-        the_reason
+        end_date
       );
       message.reply({
-        content: `Successfully update your reason inside ${end_date}.`,
+        content: `Successfully update your end date inside ${now}.`,
       });
     }
     // Otherwise, I will insert the new data.

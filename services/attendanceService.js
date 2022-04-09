@@ -76,6 +76,22 @@ class KnexConnection {
     }
   }
 
+  async updateStartDateEndDate(theAttendance, attendanceNewEndDate) {
+    try {
+      return await this.knex("attendance")
+        .where({
+          user_id: theAttendance.user_id,
+          from: theAttendance.from,
+          server_id: theAttendance.server_id,
+        })
+        .update({
+          until: attendanceNewEndDate,
+        });
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async updateEndDateReason(theAttendance, attendanceNewReason) {
     try {
       return await this.knex("attendance")
