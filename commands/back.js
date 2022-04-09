@@ -37,7 +37,11 @@ module.exports = new Command({
         return res;
       });
     // If there is a data inside userAbsences, delete her.
-    if (Object.keys(userAbsences).length !== 0) {
+    if (
+      userAbsences !== null &&
+      userAbsences !== undefined &&
+      Object.keys(userAbsences).length !== 0
+    ) {
       attendanceService.deleteAttendanceByStartDateOfUser(
         message.author.id,
         theDate,
