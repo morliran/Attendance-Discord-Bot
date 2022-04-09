@@ -44,6 +44,19 @@ module.exports = new Command({
           return res;
         });
       if (Object.keys(prevAttendance).length !== 0) {
+        if (
+          datesHelper.totalDays(prevAttendance.from, newEndDate) >
+          attendance.maxDayToBeOffline
+        ) {
+          return message.reply({
+            content: `Sorry can't insert ${datesHelper.totalDays(
+              prevAttendance.from,
+              newEndDate
+            )} max absence day to be offline is: ${
+              attendance.maxDayToBeOffline
+            }`,
+          });
+        }
         // If the new end date is before the starting date, then display a message.
         if (
           datesHelper.checkStartDateBeforeEnd(
@@ -57,6 +70,19 @@ module.exports = new Command({
         }
         // Otherwise, update the new end date.
         else {
+          if (
+            datesHelper.totalDays(prevAttendance.from, newEndDate) >
+            attendance.maxDayToBeOffline
+          ) {
+            return message.reply({
+              content: `Sorry can't insert ${datesHelper.totalDays(
+                prevAttendance.from,
+                newEndDate
+              )} max absence day to be offline is: ${
+                attendance.maxDayToBeOffline
+              }`,
+            });
+          }
           await attendanceService.updateEndDate(
             {
               user_id: message.author.id,

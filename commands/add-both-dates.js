@@ -43,6 +43,17 @@ module.exports = new Command({
       return message.reply(`${end_date} must be after ${start_date}.`);
     }
 
+    if (
+      datesHelper.totalDays(start_date, end_date) > attendance.maxDayToBeOffline
+    ) {
+      return message.reply({
+        content: `Sorry can't insert ${datesHelper.totalDays(
+          start_date,
+          end_date
+        )} max absence day to be offline is: ${attendance.maxDayToBeOffline}`,
+      });
+    }
+
     if (the_reason == undefined) {
       return message.channel.send(`Please give a reason of your absence.`);
     }

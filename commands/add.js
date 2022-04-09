@@ -58,6 +58,15 @@ module.exports = new Command({
       checkEndDateExists = checkUserExists.filter((u) => u.until === end_date);
     }
 
+    if (datesHelper.totalDays(now, end_date) > attendance.maxDayToBeOffline) {
+      return message.reply({
+        content: `Sorry can't insert ${datesHelper.totalDays(
+          now,
+          end_date
+        )} max absence day to be offline is: ${attendance.maxDayToBeOffline}`,
+      });
+    }
+
     // If there is a data with same end date, then I will update the reason.
     if (checkEndDateExists.length > 0) {
       attendanceService.updateEndDateReason(

@@ -1,5 +1,6 @@
 {
   "date_formatter": "DD-MM-YYYY",
   "server": "",
-  "server_id": ""
+  "server_id": "",
+  "maxDayToBeOffline": 31
 }
